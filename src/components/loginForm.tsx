@@ -7,6 +7,7 @@ import { useForm, SubmitHandler} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { PEOPLES_IMAGES } from "@/images"
+import Cookies from "universal-cookie"
 
 interface FormValues {
   username:string;
@@ -17,7 +18,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
-
+const cookies = new Cookies();
   const schema = yup.object().shape({
     username:yup
     .string()
@@ -45,7 +46,18 @@ if(!response.ok) {
   return;
 }
 const responseData = await response.json()
-console.log(responseData)
+console.log(responseData);
+const expires = new Date()
+expires.setDate(expires.getDate() + 1);
+cookies.set("token", responseData.token, {
+expires,
+});
+cookies.set("username", responseData.username, {
+  expires,
+  });
+  cookies.set("name", responseData.name, {
+    expires,
+    });
   }
 
   const {register, handleSubmit,formState: {errors}, } = useForm<FormValues>({ resolver:yupResolver(schema)})
