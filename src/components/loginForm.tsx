@@ -8,6 +8,9 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { PEOPLES_IMAGES } from "@/images"
 import Cookies from "universal-cookie"
+import { StreamVideoClient, User } from "@stream-io/video-react-sdk";
+import { useUser } from "@/user-context"
+import { useRouter } from "next/navigation"
 
 interface FormValues {
   username:string;
@@ -18,6 +21,13 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
+
+
+  const router = useRouter();
+
+const { setClient, setUser } = useUser()
+  const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY
+  const apiSecret = process.env.STREAM_API_SECRET
 const cookies = new Cookies();
   const schema = yup.object().shape({
     username:yup
@@ -47,6 +57,19 @@ if(!response.ok) {
 }
 const responseData = await response.json()
 console.log(responseData);
+
+const user: User = {
+  id: username,
+  name,
+}
+//@ts-expect-error abc
+const myClient = new StreamVideoClient({
+  apiKey:apiKey,
+  user,
+  token:responseData.token
+})
+setClient(myClient)
+setUser({username, name})
 const expires = new Date()
 expires.setDate(expires.getDate() + 1);
 cookies.set("token", responseData.token, {
@@ -58,8 +81,10 @@ cookies.set("username", responseData.username, {
   cookies.set("name", responseData.name, {
     expires,
     });
-  }
 
+    router.push("/room")
+  }
+ 
   const {register, handleSubmit,formState: {errors}, } = useForm<FormValues>({ resolver:yupResolver(schema)})
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props} onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +108,7 @@ cookies.set("username", responseData.username, {
           <Input id="name" type="name" required {...register("name")} />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
-        <Button type="submit" className="w-full">
+        <Button  type="submit" className="w-full">
           SignIn
         </Button>
        

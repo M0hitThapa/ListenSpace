@@ -28,6 +28,8 @@ const transitionVariants = {
 }
 
 export default function HeroSection() {
+
+    
     return (
         <>
             <HeroHeader />
@@ -135,7 +137,7 @@ export default function HeroSection() {
                                             asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
-                                            <Link href="#link">
+                                            <Link href="/login">
                                                 <span className="text-nowrapfont-mono">Join Room</span>
                                             </Link>
                                         </Button>
@@ -146,7 +148,7 @@ export default function HeroSection() {
                                         size="lg"
                                         variant="outline"
                                         className="h-10.5 rounded-xl px-5">
-                                        <Link href="#link">
+                                        <Link href="/login">
                                             <span className="text-nowrap text-lg font-mono">Create Room</span>
                                         </Link>
                                     </Button>
