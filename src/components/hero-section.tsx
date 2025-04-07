@@ -82,7 +82,7 @@ export default function HeroSection() {
                             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                                 <AnimatedGroup variants={transitionVariants}>
                                     <Link
-                                        href="#link"
+                                        href="#login"
                                         className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
                                         <span className="text-foreground text-sm">Match your Vibe</span>
                                        
@@ -104,7 +104,7 @@ export default function HeroSection() {
                                     preset="fade-in-blur"
                                     speedSegment={0.3}
                                     as="h1"
-                                    className="mt-8 text-balance text-3xl md:text-7xl lg:mt-16 xl:text-[4.25rem] font-mono font-semibold ">
+                                    className="mt-8 text-balance text-3xl md:text-7xl lg:mt-16 xl:text-[4.25rem] text-white/80 font-semibold ">
                                     Where Conversations Thrive and Ideas Blossom
                                 </TextEffect>
                                 <TextEffect
@@ -113,7 +113,7 @@ export default function HeroSection() {
                                     speedSegment={0.3}
                                     delay={0.5}
                                     as="p"
-                                    className="mx-auto mt-8 max-w-2xl text-balance text-lg font-medium font-mono">
+                                    className="mx-auto mt-8 max-w-2xl text-balance font-serif text-white/80 ">
                                     Join a vibrant community to share ideas, connect with others, and be part of meaningful discussions. Start engaging today!
                                 </TextEffect>
 
@@ -136,22 +136,13 @@ export default function HeroSection() {
                                         <Button
                                             asChild
                                             size="lg"
-                                            className="rounded-xl px-5 text-base">
+                                            className="rounded-lg px-3 text-base">
                                             <Link href="/login">
-                                                <span className="text-nowrapfont-mono">Join Room</span>
+                                                <span className="text-nowrap font-mono ">Join Room</span>
                                             </Link>
                                         </Button>
                                     </div>
-                                    <Button
-                                        key={2}
-                                        asChild
-                                        size="lg"
-                                        variant="outline"
-                                        className="h-10.5 rounded-xl px-5">
-                                        <Link href="/login">
-                                            <span className="text-nowrap text-lg font-mono">Create Room</span>
-                                        </Link>
-                                    </Button>
+                                  
                                 </AnimatedGroup>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import HeroSection from "@/components/hero-section";
 import { useUser } from "@/user-context";
 import { StreamVideo } from "@stream-io/video-react-sdk";
+import RoomPage from "./room/page";
 
 export default function Home() {
   const { client } = useUser();
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <StreamVideo client={client}>
       <HeroSection />
+      <RoomPage />
     </StreamVideo>
   );
 }       
